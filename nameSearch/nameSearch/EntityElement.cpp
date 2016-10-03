@@ -4,18 +4,29 @@
 
 using namespace std;
 
+const size_t Find(std::string const& input, char const* element, size_t pos)
+{
+	for (auto i = pos; i < input.size(); i++)
+	{
+		if (input[i] == *element)
+		{
+			return i;
+		}
+	}
+	return std::string::npos;
+}
 
 CEntityElement::CEntityElement(std::string const& input)
 {
 	string var;
 	size_t variableCount = 1;
-	auto pos = input.find(",");
+	auto pos = Find(input, ",", 0);
 	auto oldPos = 0;
 	while (pos != string::npos)
 	{
 		var = input.substr(oldPos, pos - oldPos);
 		oldPos = pos + 1;
-		pos = input.find(",", oldPos);
+		pos = Find(input, ",", oldPos);
 		switch (variableCount++)
 		{
 		case 1:
